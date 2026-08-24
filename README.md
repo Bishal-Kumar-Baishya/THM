@@ -1,6 +1,9 @@
 # TryHackMe Learning Notes
 Comprehensive notes from TryHackMe Pre Security (Aug 2026)
 
+## Introduction
+This document contains notes from structured learning on TryHackMe, covering Linux fundamentals, security concepts, vulnerability exploitation (CVE-2024-21413), and Metasploit framework basics. These notes track progression from system administration to penetration testing techniques.
+
 ## NEW SKILLS UNLOCKED
 
 ### System Administration
@@ -170,59 +173,3 @@ They can do remote code execution, like running a malware in background without 
 I created a directory named CVE-2024-21413 which contains the POC of this vulnerability, which i will use to exploit it.
 I have the exploit in this directory replacing the attacker_ip with our tun0 interface ip. Then we listen using responder in tun0 interface which captures the NET-NTLMv2 hash.
 
-
-### Metasploit Framework
-So it is mainly focused on penetration testing. It is set of tools that allow information gathering, scanning, exploitation, exploit development, post-exploitation and more.
-Main components of the metasploit framework is:-
-- msfconsole: main command line interface
-- modules: supporting modules such as exploits, scanners, payloads etc.
-
-***Some terms***
-
-**Exploitation:** Using the flaw or vulnerability to gain unauthorized access.
-**Payload:** These are codes that will run on the target system.
-
-The metasploit console can be used just like a regular command-line shell.
-
-***Key Navigation commands:***
-- `search <term>` -> finds modules in metasploit's database.
-- `use <name or #>` -> selects an exploit or scanner to work with.
-- `show options` -> lists all settings required to run the current module (IPs, ports, target OS)
-- `set <option> <val>` -> configure a required setting (eg: set RHOSTS 10.10.10.50)
-- `info` -> shows full details about the active module (who wrote it, how it works, CVE numbers)
-- `show payloads` -> lists all compatible malicious code options you can send to the target once exploited.
-
-There are 5 command prompts we need to check :-
-- `root@ip-<val>:~#` -> linux terminal
-- `msf6>` -> metasploit main menu
-- `msf6 exploit(...)>` -> module content
-- `meterpreter>` -> meterpreter context
-- `C:\Windows\system32>` -> target os shell
-
-***Core metasploit variables:***
-
-- **RHOSTS:**  remote host -> the target machine's IP address (set RHOSTS 10.10.165.39)
-- **RPORT:**  remote port -> the port running the target services (set RPORT 445)
-- **LHOSTS:** local host -> Our attacking machine's IP addr (set LHOSTS 10.10.44.70)
-- **LPORT:**  local port -> the open port on our machine waiting for the incoming connection (set LHOSTS 4444)
-- **PAYLOAD:** the specific shell code delivered to target once the vulnerability is triggered (set PAYLOAD windows/x64/meterpreter/reverse_tcp)
-
-***Management & Global commands:***
-
-- `unset <option>/ unset all`:  clears a specific variable or resets all variables in the active module (unset PAYLOAD -> clear a set payload)
-- `setg <option> <value>`:  Sets a Global Variable. If we set setg RHOSTS 10.10.165.39, Metasploit automatically populates RHOSTS for every module we load afterward until we exit msfconsole. (setg RHOSTS 10.10.19.23)
-- `exploit (or run)`:  Launches the active attack.
-- `exploit -z`:  Runs the exploit and automatically puts the new connection into the background without dropping us straight into the interactive shell.
-
-***Managing Sessions (Connections):***
-When an exploit succeeds, it opens an active Session (a live tunnel between our PC and the victim):
-- `background (or CTRL+Z)`: Temporarily leaves an active session without closing it, putting us back in the Metasploit terminal.
-- `sessions`: Lists all open, active compromised connections on target hosts.
-- `sessions -i <ID>`: Re-enters a backgrounded session (e.g., sessions -i 2 jumps back into Session #2).
-
-
-***EternalBlue Example***
-Successfully demonstrated MS17-010 exploitation using Metasploit:
-- Used `exploit/windows/smb/ms17_010_eternalblue` module
-- Gained SYSTEM shell via Meterpreter
-- Demonstrated process enumeration and system information gathering
