@@ -33,7 +33,7 @@ Secure copy or SCP is a way that allows us to transfer files between 2 computers
 ```bash
 scp important.txt ubuntu@<IP>:/home/ubuntu/transferred.txt
 ```
-This command copies a local file named important.txt to a remote machine with the IP address 192.168.1.30, logging in as user ubuntu and saving it as /home/ubuntu/transferred.txt
+This command copies a local file named important.txt to a remote machine, logging in as user ubuntu and saving it to /home/ubuntu/transferred.txt
 ```bash
 scp ubuntu@<IP>:/home/ubuntu/documents.txt notes.txt
 ```
@@ -55,9 +55,9 @@ They use our actual IP. Someone can access it via lo, eth0 or tun0 etc.
 eg:-
 Suppose if our machine has:
 
-eth0 (physical ethernet) = `IP 192.168.x.x`
+eth0 (physical ethernet) = `<NETWORK_IP>`
 
-tun0 (VPN tunnel) = `IP 10.10.x.x`
+tun0 (VPN tunnel) = `<VPN_IP>`
 
 lo (localhost) = `IP 127.0.0.1`
 
@@ -65,17 +65,17 @@ By listening on `0.0.0.0:8000`:
 Someone can connect via ANY of these IPs:
 
 ```
-wget http://192.168.x.x:8000/file
+wget http://<NETWORK_IP>:8000/file
 ```
 ```
-wget http://10.10.x.x:8000/file
+wget http://<VPN_IP>:8000/file
 ```
 ```
 wget http://127.0.0.1:8000/file
 ```
 To access only through one interface, we can use -
 ```python
-python3 -m http.server --bind 10.10.x.x
+python3 -m http.server --bind <VPN_IP>
 ```
 The IP shown in server log is the machine that downloaded the file.
 
