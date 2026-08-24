@@ -55,9 +55,9 @@ They use our actual IP. Someone can access it via lo, eth0 or tun0 etc.
 eg:-
 Suppose if our machine has:
 
-eth0 (physical ethernet) = `IP 192.168.1.20`
+eth0 (physical ethernet) = `IP 192.168.x.x`
 
-tun0 (VPN tunnel) = `IP 10.10.14.213`
+tun0 (VPN tunnel) = `IP 10.10.x.x`
 
 lo (localhost) = `IP 127.0.0.1`
 
@@ -65,17 +65,17 @@ By listening on `0.0.0.0:8000`:
 Someone can connect via ANY of these IPs:
 
 ```
-wget http://192.168.1.20:8000/file
+wget http://192.168.x.x:8000/file
 ```
 ```
-wget http://10.10.14.213:8000/file
+wget http://10.10.x.x:8000/file
 ```
 ```
 wget http://127.0.0.1:8000/file
 ```
 To access only through one interface, we can use -
 ```python
-python3 -m http.server --bind 10.10.14.213
+python3 -m http.server --bind 10.10.x.x
 ```
 The IP shown in server log is the machine that downloaded the file.
 
