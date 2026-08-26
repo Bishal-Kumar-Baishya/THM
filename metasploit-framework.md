@@ -278,10 +278,10 @@ chmod +x rev_shell.elf
 
 We will gain a meterpreter shell, after that we can use various commands to know about the system.
 ```
-sysinfo
-getuid
+sysinfo     # to see info about OS version, kernel version, installed software, patch level
+getuid      # to see if we are running as root or regular user
 pwd
-ls
+ls          # to see if sensitive info 
 ```
 
 Privilege Escalation & Hash Dump inside Target Shell
