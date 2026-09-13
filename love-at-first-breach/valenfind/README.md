@@ -1,12 +1,11 @@
-# ValenFind Penetration Test Report
+# ValenFind - CTF
 
 **Target:** ValenFind Dating Application  
 **Difficulty:** Medium  
 **Status:** Complete ✅
 
 ## Summary
-Critical Local File Inclusion vulnerability allows unauthenticated attackers 
-to read arbitrary files and compromise the entire application.
+Critical Local File Inclusion vulnerability allows unauthenticated attackers to read arbitrary files and compromise the entire application.
 
 ## Key Findings
 - **Critical LFI** via path traversal in `/api/fetch_layout`
@@ -16,7 +15,6 @@ to read arbitrary files and compromise the entire application.
 ## Files
 - `REPORT.md` - Professional penetration test report
 - `WALKTHROUGH.md` - Step-by-step exploitation guide
-- `evidence/` - Screenshots and proof of exploitation
 
 ## Quick Links
 [Full Report](./REPORT.md) | [Walkthrough](./WALKTHROUGH.md)
