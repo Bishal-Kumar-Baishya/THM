@@ -142,9 +142,9 @@ This project is for educational purposes. All documentation and findings are ava
 
 ## 🔗 Quick Links
 
-- 📖 [Full Penetration Testing Report](./PENTEST_REPORT.md)
+- 📖 [Full Penetration Testing Report](./REPORT.md)
 - 🎯 [Step-by-Step Walkthrough](./WALKTHROUGH.md)
-- 🐱 [GitHub Repository](https://github.com/Bishal-Kumar-Baishya/Romance&co)
+- 🐱 [GitHub Repository](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/Romance&co)
 - 💼 [Portfolio](https://github.com/Bishal-Kumar-Baishya)
 
 ---
