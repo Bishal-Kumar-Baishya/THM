@@ -1,6 +1,6 @@
 # Love at first breach - ValenFind CTF - Complete Walkthrough
 
-**Target IP:** 10.49.179.188
+**Target IP:** 10.49.179.188<br>
 **Difficulty:** Medium
 
 ## 1. Reconnaissance
