@@ -108,3 +108,143 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - Social engineering is effective against poorly designed systems
 
 **GitHub:** [View Full Report](./CupidBot/)
+
+---
+
+## 📊 Challenge Comparison
+
+| Challenge | Difficulty | Vulnerability Type | Category | Time | Status |
+|-----------|------------|-------------------|----------|------|--------|
+| ValenFind | Medium | Local File Inclusion (LFI) | Web | ~90 min | ✅ |
+| DeepIntoMyHeart | Easy | Data Exposure | Reconnaissance | ~45 min | ✅ |
+| CupidBot | Easy | Prompt Injection | AI/Web | ~10 min | ✅ |
+| Romance and Co. | Medium | RCE + Privilege Escalation | Web/System | ~150 min | ✅ |
+
+---
+
+## 🛠️ Tools & Techniques Used Across Series
+
+**Reconnaissance:**
+- nmap (network scanning)
+- gobuster (directory enumeration)
+- nuclei (vulnerability scanning)
+- curl/wget (manual probing)
+
+**Exploitation:**
+- Python scripting (custom exploits)
+- react2shell (RCE delivery)
+- netcat (reverse shells)
+- Manual vulnerability testing
+- Prompt injection (social engineering)
+
+**Privilege Escalation:**
+- sudo enumeration (`sudo -l`)
+- SUID binary analysis
+- Kernel exploit research
+- Service misconfiguration abuse
+
+---
+
+## 📁 Repository Structure
+```
+love-at-first-breach/
+├── README.md (this file - series overview)
+├── ValenFind/
+│ ├── README.md
+│ ├── REPORT.md
+│ └── WALKTHROUGH.md
+├── DeepIntoMyHeart/
+│ ├── README.md
+│ ├── REPORT.md
+│ └── WALKTHROUGH.md
+├── CupidBot/
+│ ├── README.md
+│ └── WALKTHROUGH.md
+└── Romance&co/
+  ├── README.md
+  ├── REPORT.md
+  └── WALKTHROUGH.md
+```
+
+---
+
+## 🎓 Skills Demonstrated
+
+### Web Security
+✅ Local File Inclusion (LFI) exploitation  
+✅ Path traversal techniques  
+✅ Secure deserialization practices  
+✅ API security assessment  
+✅ Input validation bypass  
+✅ Prompt injection against LLMs  
+
+### Reconnaissance & Enumeration
+✅ Network scanning (nmap)  
+✅ Directory brute-forcing (gobuster)  
+✅ Automated vulnerability detection (nuclei)  
+✅ Manual web application testing  
+✅ Source code analysis  
+
+### Exploitation & Post-Exploitation
+✅ Remote Code Execution (RCE) delivery  
+✅ Reverse shell establishment  
+✅ Privilege escalation techniques  
+✅ Post-exploitation persistence  
+✅ Flag retrieval and documentation  
+✅ Social engineering against AI systems  
+
+### Documentation & Reporting
+✅ Professional penetration testing reports  
+✅ CVSS score assessment  
+✅ Detailed technical walkthroughs  
+✅ Remediation recommendations  
+✅ Lessons learned analysis  
+
+---
+
+## 🔑 Key Takeaways Across Series
+
+1. **Reconnaissance is Critical** - Detailed recon saves exploitation time
+2. **Automate Where Possible** - Tools like nuclei identify vulns faster than manual testing
+3. **Defense in Depth Fails** - Combination of multiple weaknesses = total compromise
+4. **Privilege Escalation Vectors** - sudo, SUID, kernel vulns are common paths to root
+5. **Documentation Matters** - Professional reports are as important as technical skills
+6. **Social Engineering Works** - Even AI systems can be fooled by authority claims
+7. **AI Security = Application Security** - Same principles apply to LLM-based systems
+
+---
+
+## 🤝 Disclaimer
+
+All challenges were completed as part of authorized CTF assessments on TryHackMe. The techniques and tools described are for **educational and authorized testing purposes only**. Unauthorized access to computer systems is illegal.
+
+---
+
+## ✍️ Author
+
+**Bishal Kumar Baishya**  
+Cybersecurity Student | Penetration Testing Focus  
+
+**Contact:**
+- Portfolio: [GitHub](https://github.com/Bishal-Kumar-Baishya)
+- LinkedIn: [Profile](https://www.linkedin.com/in/bishal-kumar-baishya-022b56412/)
+
+---
+
+## 📄 License
+
+Educational purposes only. All documentation and findings are available for security professionals and students.
+
+---
+
+## 🔗 Quick Navigation
+
+- 📖 [ValenFind Report](./ValenFind/REPORT.md)
+- 📖 [DeepIntoMyHeart Report](./DeepIntoMyHeart/REPORT.md)
+- 📖 [CupidBot Walkthrough](./CupidBot/WALKTHROUGH.md)
+- 📖 [Romance and Co. Report](./Romance&co/REPORT.md)
+- 🐱 [GitHub Repository](https://github.com/Bishal-Kumar-Baishya/love-at-first-breach)
+
+---
+
+**Last Updated:** September 23, 2026  
