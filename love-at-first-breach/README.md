@@ -32,7 +32,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - Encoding methods to evade filters
 - Log file poisoning for RCE
 
-**GitHub:** [View Full Report](./ValenFind/)
+**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/valenfind/REPORT.md)
 
 ---
 
@@ -54,7 +54,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - Reconnaissance best practices
 - Credential management security
 
-**GitHub:** [View Full Report](./DeepIntoMyHeart/)
+**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/DeepIntoMyHeart/REPORT.md)
 
 ---
 
@@ -81,7 +81,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - Python in sudoers is dangerous
 
 **CVSS Score:** 9.8 CRITICAL  
-**GitHub:** [View Full Report](./Romance&co/)
+**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/Romance%26co/REPORT.md)
 
 ### 4. CupidBot
 
@@ -107,7 +107,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - No identity checking before revealing sensitive data
 - Social engineering is effective against poorly designed systems
 
-**GitHub:** [View Full Report](./CupidBot/)
+**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/CupidBot/WALKTHROUGH.md)
 
 ---
 
@@ -239,10 +239,10 @@ Educational purposes only. All documentation and findings are available for secu
 
 ## 🔗 Quick Navigation
 
-- 📖 [ValenFind Report](./ValenFind/REPORT.md)
-- 📖 [DeepIntoMyHeart Report](./DeepIntoMyHeart/REPORT.md)
-- 📖 [CupidBot Walkthrough](./CupidBot/WALKTHROUGH.md)
-- 📖 [Romance and Co. Report](./Romance&co/REPORT.md)
+- 📖 [ValenFind Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/valenfind/REPORT.md)
+- 📖 [DeepIntoMyHeart Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/DeepIntoMyHeart/REPORT.md)
+- 📖 [CupidBot Walkthrough](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/CupidBot/WALKTHROUGH.md)
+- 📖 [Romance and Co. Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/Romance%26co/REPORT.md)
 - 🐱 [GitHub Repository](https://github.com/Bishal-Kumar-Baishya/love-at-first-breach)
 
 ---
