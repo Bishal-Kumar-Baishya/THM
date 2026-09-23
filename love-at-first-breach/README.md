@@ -83,3 +83,28 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 **CVSS Score:** 9.8 CRITICAL  
 **GitHub:** [View Full Report](./Romance&co/)
 
+### 4. CupidBot
+
+**Difficulty:** Easy  
+**Vulnerabilities:** Prompt Injection via Role Impersonation  
+**Status:** ✅ Complete  
+
+**Quick Summary:**
+- Exploited prompt injection vulnerability in AI chatbot
+- Bypassed authorization through social engineering (claimed admin status)
+- Extracted 3 hidden flags by role impersonation
+- Demonstrated how LLMs trust unverified user claims
+
+**Key Learnings:**
+- Prompt injection techniques against LLMs
+- Authorization bypass via social engineering
+- Importance of identity verification
+- AI system security principles
+- How system prompts can be exploited
+
+**Vulnerability Details:**
+- Bot accepts user claims of admin status without verification
+- No identity checking before revealing sensitive data
+- Social engineering is effective against poorly designed systems
+
+**GitHub:** [View Full Report](./CupidBot/)
