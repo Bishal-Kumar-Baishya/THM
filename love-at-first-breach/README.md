@@ -7,8 +7,8 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 ## 📋 Series Overview
 
 **Platform:** TryHackMe  
-**Series:** Love at First Breach 
-**Focus Areas:** Web Security, Data Exposure, RCE, Privilege Escalation  
+**Series:** Love at First Breach  
+**Focus Areas:** Web Security, Data Exposure, RCE, Privilege Escalation, Authentication  
 
 ---
 
@@ -83,6 +83,8 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 **CVSS Score:** 9.8 CRITICAL  
 **GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/Romance%26co/REPORT.md)
 
+---
+
 ### 4. CupidBot
 
 **Difficulty:** Easy  
@@ -111,6 +113,36 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 
 ---
 
+### 5. TryHeartMe
+
+**Difficulty:** Easy  
+**Vulnerabilities:** JWT Token Manipulation / Privilege Escalation  
+**Status:** ✅ Complete  
+
+**Quick Summary:**
+- Identified JWT-based authentication mechanism
+- Extracted and decoded JWT token from browser storage
+- Modified JWT claims (user→admin, credit→9999999)
+- Replaced token to gain unauthorized admin access
+- Retrieved flag from admin panel
+
+**Key Learnings:**
+- JWT structure and payload decoding
+- Token-based privilege escalation
+- Importance of signature verification
+- Role-based access control implementation
+- Backend validation of token claims
+
+**Vulnerability Details:**
+- JWT tokens don't validate signatures properly
+- User claims accepted without backend verification
+- Attackers can decode, modify, and re-encode tokens
+- No role validation on protected routes
+
+**GitHub:** [View Full Report](http://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/TryHeartMe/REPORT.md)
+
+---
+
 ## 📊 Challenge Comparison
 
 | Challenge | Difficulty | Vulnerability Type | Category | Time | Status |
@@ -118,6 +150,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 | ValenFind | Medium | Local File Inclusion (LFI) | Web | ~90 min | ✅ |
 | DeepIntoMyHeart | Easy | Data Exposure | Reconnaissance | ~45 min | ✅ |
 | CupidBot | Easy | Prompt Injection | AI/Web | ~10 min | ✅ |
+| TryHeartMe | Easy | JWT Manipulation | Authentication | ~15 min | ✅ |
 | Romance and Co. | Medium | RCE + Privilege Escalation | Web/System | ~150 min | ✅ |
 
 ---
@@ -129,11 +162,13 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - gobuster (directory enumeration)
 - nuclei (vulnerability scanning)
 - curl/wget (manual probing)
+- Browser DevTools (token extraction)
 
 **Exploitation:**
 - Python scripting (custom exploits)
 - react2shell (RCE delivery)
 - netcat (reverse shells)
+- jwt.io (JWT decoding/manipulation)
 - Manual vulnerability testing
 - Prompt injection (social engineering)
 
@@ -142,6 +177,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - SUID binary analysis
 - Kernel exploit research
 - Service misconfiguration abuse
+- Token claim manipulation
 
 ---
 
@@ -160,11 +196,16 @@ love-at-first-breach/
 ├── CupidBot/
 │ ├── README.md
 │ └── WALKTHROUGH.md
+├── TryHeartMe/
+│ ├── README.md
+│ ├── REPORT.md
+│ └── WALKTHROUGH.md
 └── Romance&co/
-  ├── README.md
-  ├── REPORT.md
-  └── WALKTHROUGH.md
+├── README.md
+├── REPORT.md
+└── WALKTHROUGH.md
 ```
+
 
 ---
 
@@ -177,6 +218,14 @@ love-at-first-breach/
 ✅ API security assessment  
 ✅ Input validation bypass  
 ✅ Prompt injection against LLMs  
+✅ JWT manipulation and privilege escalation  
+
+### Authentication & Authorization
+✅ JWT token structure and implementation  
+✅ Signature verification requirements  
+✅ Role-based access control (RBAC)  
+✅ Token claim validation  
+✅ Backend authentication checks  
 
 ### Reconnaissance & Enumeration
 ✅ Network scanning (nmap)  
@@ -184,6 +233,7 @@ love-at-first-breach/
 ✅ Automated vulnerability detection (nuclei)  
 ✅ Manual web application testing  
 ✅ Source code analysis  
+✅ Storage inspection and token extraction  
 
 ### Exploitation & Post-Exploitation
 ✅ Remote Code Execution (RCE) delivery  
@@ -192,6 +242,7 @@ love-at-first-breach/
 ✅ Post-exploitation persistence  
 ✅ Flag retrieval and documentation  
 ✅ Social engineering against AI systems  
+✅ Token manipulation and claim modification  
 
 ### Documentation & Reporting
 ✅ Professional penetration testing reports  
@@ -202,15 +253,36 @@ love-at-first-breach/
 
 ---
 
+## 📈 Learning Progression
+
+**Challenge 1 (Easy):** Data Exposure  
+→ Understand reconnaissance and information gathering
+
+**Challenge 2 (Easy):** Prompt Injection  
+→ Learn AI system vulnerabilities and social engineering
+
+**Challenge 3 (Easy):** JWT Manipulation  
+→ Learn authentication vulnerabilities and token exploitation
+
+**Challenge 4 (Medium):** LFI Exploitation  
+→ Learn vulnerability exploitation and file system access
+
+**Challenge 5 (Medium):** RCE + Privilege Escalation  
+→ Master complete system compromise and advanced techniques
+
+---
+
 ## 🔑 Key Takeaways Across Series
 
 1. **Reconnaissance is Critical** - Detailed recon saves exploitation time
 2. **Automate Where Possible** - Tools like nuclei identify vulns faster than manual testing
 3. **Defense in Depth Fails** - Combination of multiple weaknesses = total compromise
-4. **Privilege Escalation Vectors** - sudo, SUID, kernel vulns are common paths to root
+4. **Privilege Escalation Vectors** - sudo, SUID, kernel vulns, and token manipulation are common paths to root
 5. **Documentation Matters** - Professional reports are as important as technical skills
 6. **Social Engineering Works** - Even AI systems can be fooled by authority claims
-7. **AI Security = Application Security** - Same principles apply to LLM-based systems
+7. **Never Trust User Input** - Especially for authentication and authorization claims
+8. **AI Security = Application Security** - Same principles apply to LLM-based systems
+9. **Always Verify Cryptographic Signatures** - JWTs must validate with server secret key
 
 ---
 
@@ -242,9 +314,10 @@ Educational purposes only. All documentation and findings are available for secu
 - 📖 [ValenFind Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/valenfind/REPORT.md)
 - 📖 [DeepIntoMyHeart Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/DeepIntoMyHeart/REPORT.md)
 - 📖 [CupidBot Walkthrough](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/CupidBot/WALKTHROUGH.md)
+- 📖 [TryHeartMe Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/TryHeartMe/REPORT.md)
 - 📖 [Romance and Co. Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/Romance%26co/REPORT.md)
 - 🐱 [GitHub Repository](https://github.com/Bishal-Kumar-Baishya/love-at-first-breach)
 
 ---
 
-**Last Updated:** September 23, 2026  
+**Last Updated:** September 26, 2026
