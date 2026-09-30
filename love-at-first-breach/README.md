@@ -127,7 +127,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - Never trust file upload without strict validation
 
 **CVSS Score:** 9.8 CRITICAL  
-**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/SpeedChat/PENTEST_REPORT.md)
+**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/SpeedChat/REPORT.md)
 
 ---
 
