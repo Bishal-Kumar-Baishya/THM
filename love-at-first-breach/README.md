@@ -58,7 +58,80 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 
 ---
 
-### 3. Romance and Co.
+### 3. CupidBot
+
+**Difficulty:** Easy  
+**Vulnerabilities:** Prompt Injection via Role Impersonation  
+**Status:** ✅ Complete  
+
+**Quick Summary:**
+- Exploited prompt injection vulnerability in AI chatbot
+- Bypassed authorization through social engineering (claimed admin status)
+- Extracted 3 hidden flags by role impersonation
+- Demonstrated how LLMs trust unverified user claims
+
+**Key Learnings:**
+- Prompt injection techniques against LLMs
+- Authorization bypass via social engineering
+- Importance of identity verification
+- AI system security principles
+- How system prompts can be exploited
+
+**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/CupidBot/WALKTHROUGH.md)
+
+---
+
+### 4. TryHeartMe
+
+**Difficulty:** Easy  
+**Vulnerabilities:** JWT Token Manipulation / Privilege Escalation  
+**Status:** ✅ Complete  
+
+**Quick Summary:**
+- Identified JWT-based authentication mechanism
+- Extracted and decoded JWT token from browser storage
+- Modified JWT claims (user→admin, credit→9999999)
+- Replaced token to gain unauthorized admin access
+- Retrieved flag from admin panel
+
+**Key Learnings:**
+- JWT structure and payload decoding
+- Token-based privilege escalation
+- Importance of signature verification
+- Role-based access control implementation
+- Backend validation of token claims
+
+**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/TryHeartMe/REPORT.md)
+
+---
+
+### 5. SpeedChat
+
+**Difficulty:** Easy  
+**Vulnerabilities:** Unrestricted File Upload with Code Execution  
+**Status:** ✅ Complete  
+
+**Quick Summary:**
+- Discovered unrestricted file upload endpoint with no validation
+- Uploaded Python reverse shell script to Flask application
+- Achieved remote code execution as root user
+- Established interactive reverse shell via netcat
+- Retrieved flag via command execution
+- Time to compromise: ~30 minutes
+
+**Key Learnings:**
+- Match reverse shell payload language to backend technology
+- Difference between command-based and interactive reverse shells
+- Interactive shells are more reliable and stable
+- File upload RCE is quick to exploit when validation is missing
+- Never trust file upload without strict validation
+
+**CVSS Score:** 9.8 CRITICAL  
+**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/SpeedChat/PENTEST_REPORT.md)
+
+---
+
+### 6. Romance and Co.
 
 **Difficulty:** Medium  
 **Vulnerabilities:** 
@@ -85,64 +158,6 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 
 ---
 
-### 4. CupidBot
-
-**Difficulty:** Easy  
-**Vulnerabilities:** Prompt Injection via Role Impersonation  
-**Status:** ✅ Complete  
-
-**Quick Summary:**
-- Exploited prompt injection vulnerability in AI chatbot
-- Bypassed authorization through social engineering (claimed admin status)
-- Extracted 3 hidden flags by role impersonation
-- Demonstrated how LLMs trust unverified user claims
-
-**Key Learnings:**
-- Prompt injection techniques against LLMs
-- Authorization bypass via social engineering
-- Importance of identity verification
-- AI system security principles
-- How system prompts can be exploited
-
-**Vulnerability Details:**
-- Bot accepts user claims of admin status without verification
-- No identity checking before revealing sensitive data
-- Social engineering is effective against poorly designed systems
-
-**GitHub:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/CupidBot/WALKTHROUGH.md)
-
----
-
-### 5. TryHeartMe
-
-**Difficulty:** Easy  
-**Vulnerabilities:** JWT Token Manipulation / Privilege Escalation  
-**Status:** ✅ Complete  
-
-**Quick Summary:**
-- Identified JWT-based authentication mechanism
-- Extracted and decoded JWT token from browser storage
-- Modified JWT claims (user→admin, credit→9999999)
-- Replaced token to gain unauthorized admin access
-- Retrieved flag from admin panel
-
-**Key Learnings:**
-- JWT structure and payload decoding
-- Token-based privilege escalation
-- Importance of signature verification
-- Role-based access control implementation
-- Backend validation of token claims
-
-**Vulnerability Details:**
-- JWT tokens don't validate signatures properly
-- User claims accepted without backend verification
-- Attackers can decode, modify, and re-encode tokens
-- No role validation on protected routes
-
-**GitHub:** [View Full Report](http://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/TryHeartMe/REPORT.md)
-
----
-
 ## 📊 Challenge Comparison
 
 | Challenge | Difficulty | Vulnerability Type | Category | Time | Status |
@@ -151,6 +166,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 | DeepIntoMyHeart | Easy | Data Exposure | Reconnaissance | ~45 min | ✅ |
 | CupidBot | Easy | Prompt Injection | AI/Web | ~10 min | ✅ |
 | TryHeartMe | Easy | JWT Manipulation | Authentication | ~15 min | ✅ |
+| SpeedChat | Easy | File Upload RCE | Web | ~30 min | ✅ |
 | Romance and Co. | Medium | RCE + Privilege Escalation | Web/System | ~150 min | ✅ |
 
 ---
@@ -159,7 +175,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 
 **Reconnaissance:**
 - nmap (network scanning)
-- gobuster (directory enumeration)
+- gobuster/ffuf (directory enumeration)
 - nuclei (vulnerability scanning)
 - curl/wget (manual probing)
 - Browser DevTools (token extraction)
@@ -171,6 +187,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - jwt.io (JWT decoding/manipulation)
 - Manual vulnerability testing
 - Prompt injection (social engineering)
+- File upload exploitation
 
 **Privilege Escalation:**
 - sudo enumeration (`sudo -l`)
@@ -178,6 +195,12 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - Kernel exploit research
 - Service misconfiguration abuse
 - Token claim manipulation
+
+**Reverse Shell Development:**
+- Socket programming (Python)
+- File descriptor redirection (os.dup2)
+- Interactive bash shells
+- Netcat listeners
 
 ---
 
@@ -200,10 +223,14 @@ love-at-first-breach/
 │ ├── README.md
 │ ├── REPORT.md
 │ └── WALKTHROUGH.md
+├── SpeedChat/
+│ ├── README.md
+│ ├── PENTEST_REPORT.md
+│ └── WALKTHROUGH.md
 └── Romance&co/
-├── README.md
-├── REPORT.md
-└── WALKTHROUGH.md
+  ├── README.md
+  ├── REPORT.md
+  └── WALKTHROUGH.md
 ```
 
 
@@ -219,6 +246,8 @@ love-at-first-breach/
 ✅ Input validation bypass  
 ✅ Prompt injection against LLMs  
 ✅ JWT manipulation and privilege escalation  
+✅ Unrestricted file upload exploitation  
+✅ Remote code execution delivery  
 
 ### Authentication & Authorization
 ✅ JWT token structure and implementation  
@@ -229,7 +258,7 @@ love-at-first-breach/
 
 ### Reconnaissance & Enumeration
 ✅ Network scanning (nmap)  
-✅ Directory brute-forcing (gobuster)  
+✅ Directory brute-forcing (gobuster, ffuf)  
 ✅ Automated vulnerability detection (nuclei)  
 ✅ Manual web application testing  
 ✅ Source code analysis  
@@ -238,11 +267,13 @@ love-at-first-breach/
 ### Exploitation & Post-Exploitation
 ✅ Remote Code Execution (RCE) delivery  
 ✅ Reverse shell establishment  
+✅ Interactive shell development (Python sockets)  
 ✅ Privilege escalation techniques  
 ✅ Post-exploitation persistence  
 ✅ Flag retrieval and documentation  
 ✅ Social engineering against AI systems  
 ✅ Token manipulation and claim modification  
+✅ File upload RCE exploitation  
 
 ### Documentation & Reporting
 ✅ Professional penetration testing reports  
@@ -264,10 +295,13 @@ love-at-first-breach/
 **Challenge 3 (Easy):** JWT Manipulation  
 → Learn authentication vulnerabilities and token exploitation
 
-**Challenge 4 (Medium):** LFI Exploitation  
+**Challenge 4 (Easy):** File Upload RCE  
+→ Learn unrestricted upload exploitation and reverse shell development
+
+**Challenge 5 (Medium):** LFI Exploitation  
 → Learn vulnerability exploitation and file system access
 
-**Challenge 5 (Medium):** RCE + Privilege Escalation  
+**Challenge 6 (Medium):** RCE + Privilege Escalation  
 → Master complete system compromise and advanced techniques
 
 ---
@@ -281,8 +315,11 @@ love-at-first-breach/
 5. **Documentation Matters** - Professional reports are as important as technical skills
 6. **Social Engineering Works** - Even AI systems can be fooled by authority claims
 7. **Never Trust User Input** - Especially for authentication and authorization claims
-8. **AI Security = Application Security** - Same principles apply to LLM-based systems
-9. **Always Verify Cryptographic Signatures** - JWTs must validate with server secret key
+8. **Match Payload Language to Backend** - Python shells for Python apps, bash for Linux, etc.
+9. **Interactive Shells are Better** - More reliable than command-based shells for persistence
+10. **Always Validate File Uploads** - Use magic bytes + library verification, never just extensions
+11. **AI Security = Application Security** - Same principles apply to LLM-based systems
+12. **Always Verify Cryptographic Signatures** - JWTs must validate with server secret key
 
 ---
 
@@ -315,9 +352,10 @@ Educational purposes only. All documentation and findings are available for secu
 - 📖 [DeepIntoMyHeart Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/DeepIntoMyHeart/REPORT.md)
 - 📖 [CupidBot Walkthrough](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/CupidBot/WALKTHROUGH.md)
 - 📖 [TryHeartMe Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/TryHeartMe/REPORT.md)
+- 📖 [SpeedChat Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/SpeedChat/REPORT.md)
 - 📖 [Romance and Co. Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/Romance%26co/REPORT.md)
 - 🐱 [GitHub Repository](https://github.com/Bishal-Kumar-Baishya/love-at-first-breach)
 
 ---
 
-**Last Updated:** September 26, 2026
+**Last Updated:** September 30, 2026
