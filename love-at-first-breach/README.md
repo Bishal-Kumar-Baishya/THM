@@ -158,16 +158,31 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 
 ---
 
-## 📊 Challenge Comparison
+---
 
-| Challenge | Difficulty | Vulnerability Type | Category | Time | Status |
-|-----------|------------|-------------------|----------|------|--------|
-| ValenFind | Medium | Local File Inclusion (LFI) | Web | ~90 min | ✅ |
-| DeepIntoMyHeart | Easy | Data Exposure | Reconnaissance | ~45 min | ✅ |
-| CupidBot | Easy | Prompt Injection | AI/Web | ~10 min | ✅ |
-| TryHeartMe | Easy | JWT Manipulation | Authentication | ~15 min | ✅ |
-| SpeedChat | Easy | File Upload RCE | Web | ~30 min | ✅ |
-| Romance and Co. | Medium | RCE + Privilege Escalation | Web/System | ~150 min | ✅ |
+### 7. Signed Messages ⭐
+
+**Difficulty:** 🟡 Medium  
+**Category:** Web Security, Cryptography, Authentication  
+**Vulnerabilities:**
+- Passwordless authentication (no password required)
+- Predictable cryptographic seeds (RSA key generation)
+- Information disclosure via debug endpoint
+**Status:** ✅ Complete
+
+**Quick Summary:**
+Discovered multiple cryptographic weaknesses in a "Love Note" application. Exploited passwordless authentication to access admin accounts, then leveraged a publicly accessible debug endpoint that revealed the RSA key generation algorithm. Reconstructed the admin's private key using the predictable seed pattern and forged valid digital signatures. Demonstrates how multiple "small" vulnerabilities chain into complete system compromise.
+
+**Key Learnings:**
+- Never use predictable data for cryptographic seeds
+- Passwords are fundamental (authentication without them is worthless)
+- Debug endpoints leak sensitive architectural information
+- Digital signatures are only as secure as their keys
+- Multiple weak controls compound into critical compromise
+- Defense in depth matters: every layer must be secure
+
+**CVSS Score:** 9.8 (CRITICAL)<br>
+**Github:** [View Full Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/SignedMessage/REPORT.md)
 
 ---
 
@@ -188,6 +203,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 - Manual vulnerability testing
 - Prompt injection (social engineering)
 - File upload exploitation
+- Cryptography library (RSA key reconstruction)
 
 **Privilege Escalation:**
 - sudo enumeration (`sudo -l`)
@@ -207,11 +223,7 @@ A comprehensive collection of penetration testing challenges from the TryHackMe 
 ## 📁 Repository Structure
 ```
 love-at-first-breach/
-├── README.md (this file - series overview)
-├── ValenFind/
-│ ├── README.md
-│ ├── REPORT.md
-│ └── WALKTHROUGH.md
+├── README.md (series overview - this file)
 ├── DeepIntoMyHeart/
 │ ├── README.md
 │ ├── REPORT.md
@@ -226,11 +238,20 @@ love-at-first-breach/
 ├── SpeedChat/
 │ ├── README.md
 │ ├── PENTEST_REPORT.md
+│ ├── WALKTHROUGH.md
+│ └── shell.py
+├── ValenFind/
+│ ├── README.md
+│ ├── REPORT.md
 │ └── WALKTHROUGH.md
-└── Romance&co/
+├── Romance&co/
+│ ├── README.md
+│ ├── REPORT.md
+│ └── WALKTHROUGH.md
+└── Signed_Messages/
   ├── README.md
-  ├── REPORT.md
-  └── WALKTHROUGH.md
+  ├── WALKTHROUGH.md
+  ├── PENTEST_REPORT.md
 ```
 
 
@@ -255,6 +276,15 @@ love-at-first-breach/
 ✅ Role-based access control (RBAC)  
 ✅ Token claim validation  
 ✅ Backend authentication checks  
+
+### Cryptography
+✅ RSA cryptography fundamentals  
+✅ Digital signature generation and verification  
+✅ Key generation and derivation  
+✅ Predictable seed identification  
+✅ Private key reconstruction  
+✅ Hash functions (SHA256)  
+✅ Modular arithmetic and number theory  
 
 ### Reconnaissance & Enumeration
 ✅ Network scanning (nmap)  
@@ -286,23 +316,16 @@ love-at-first-breach/
 
 ## 📈 Learning Progression
 
-**Challenge 1 (Easy):** Data Exposure  
-→ Understand reconnaissance and information gathering
+**Phase 1: Fundamentals (Easy Challenges)**
+- DeepIntoMyHeart: Reconnaissance and information gathering
+- CupidBot: Social engineering and AI security
+- TryHeartMe: Token manipulation and authentication bypass
+- SpeedChat: File upload exploitation and reverse shells
 
-**Challenge 2 (Easy):** Prompt Injection  
-→ Learn AI system vulnerabilities and social engineering
-
-**Challenge 3 (Easy):** JWT Manipulation  
-→ Learn authentication vulnerabilities and token exploitation
-
-**Challenge 4 (Easy):** File Upload RCE  
-→ Learn unrestricted upload exploitation and reverse shell development
-
-**Challenge 5 (Medium):** LFI Exploitation  
-→ Learn vulnerability exploitation and file system access
-
-**Challenge 6 (Medium):** RCE + Privilege Escalation  
-→ Master complete system compromise and advanced techniques
+**Phase 2: Intermediate (Medium Challenges)**
+- ValenFind: File inclusion and path traversal
+- Romance and Co.: Automated scanning and advanced RCE
+- Signed Messages: Cryptography attacks and key reconstruction
 
 ---
 
@@ -331,12 +354,11 @@ All challenges were completed as part of authorized CTF assessments on TryHackMe
 
 ## ✍️ Author
 
-**Bishal Kumar Baishya**  
+**Bishal Kumar Baishya**<br>
 Cybersecurity Student | Penetration Testing Focus  
 
-**Contact:**
-- Portfolio: [GitHub](https://github.com/Bishal-Kumar-Baishya)
-- LinkedIn: [Profile](https://www.linkedin.com/in/bishal-kumar-baishya-022b56412/)
+**GitHub/Portfolio:** [GitHub Link](https://github.com/Bishal-Kumar-Baishya)<br>
+**LinkedIn:** [Profile](https://www.linkedin.com/in/bishal-kumar-baishya-022b56412/)
 
 ---
 
@@ -346,16 +368,4 @@ Educational purposes only. All documentation and findings are available for secu
 
 ---
 
-## 🔗 Quick Navigation
-
-- 📖 [ValenFind Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/valenfind/REPORT.md)
-- 📖 [DeepIntoMyHeart Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/DeepIntoMyHeart/REPORT.md)
-- 📖 [CupidBot Walkthrough](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/CupidBot/WALKTHROUGH.md)
-- 📖 [TryHeartMe Report](https://github.com/Bishal-Kumar-Baishya/THM/blob/main/love-at-first-breach/TryHeartMe/REPORT.md)
-- 📖 [SpeedChat Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/SpeedChat/REPORT.md)
-- 📖 [Romance and Co. Report](https://github.com/Bishal-Kumar-Baishya/THM/tree/main/love-at-first-breach/Romance%26co/REPORT.md)
-- 🐱 [GitHub Repository](https://github.com/Bishal-Kumar-Baishya/love-at-first-breach)
-
----
-
-**Last Updated:** September 30, 2026
+**Last Updated:** October 2, 2026
